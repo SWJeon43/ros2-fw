@@ -1,4 +1,3 @@
-"""
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu
@@ -85,68 +84,6 @@ def main(args=None):
     mpu9250_publisher = MPU9250Publisher()
     rclpy.spin(mpu9250_publisher)
     mpu9250_publisher.destroy_node()
-    rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
-"""
-
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import Imu
-import smbus
-from time import sleep
-
-class MPU9250Publisher(Node):
-    def __init__(self):
-        super().__init__('mpu9250_publisher')
-        self.publisher_ = self.create_publisher(Imu, 'imu', 10)
-        self.bus = smbus.SMBus(1)
-        self.device_address = 0x68
-
-        self.mpu_init()
-        self.timer = self.create_timer(0.1, self.timer_callback)
-        self.last_time = self.get_clock().now()
-
-    def mpu_init(self):
-        self.bus.write_byte_data(self.device_address, 0x6B, 0x00)
-
-    def read_raw_data(self, addr):
-        high = self.bus.read_byte_data(self.device_address, addr)
-        low = self.bus.read_byte_data(self.device_address, addr + 1)
-        value = ((high << 8) | low)
-        if value > 32768:
-            value = value - 65536
-        return value
-
-    def timer_callback(self):
-        msg = Imu()
-
-        accel_x = self.read_raw_data(0x3B) / 16384.0
-        accel_y = self.read_raw_data(0x3D) / 16384.0
-        accel_z = self.read_raw_data(0x3F) / 16384.0
-        gyro_x = self.read_raw_data(0x43) / 131.0
-        gyro_y = self.read_raw_data(0x45) / 131.0
-        gyro_z = self.read_raw_data(0x47) / 131.0
-
-        msg.linear_acceleration.x = accel_x
-        msg.linear_acceleration.y = accel_y
-        msg.linear_acceleration.z = accel_z
-        msg.angular_velocity.x = gyro_x
-        msg.angular_velocity.y = gyro_y
-        msg.angular_velocity.z = gyro_z
-
-        msg.header.stamp = self.get_clock().now().to_msg()
-        msg.header.frame_id = 'imu_link'
-
-        self.publisher_.publish(msg)
-        self.get_logger().info('Publishing IMU data')
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = MPU9250Publisher()
-    rclpy.spin(node)
-    node.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':

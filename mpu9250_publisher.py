@@ -64,6 +64,11 @@ class MPU9250Publisher(Node):
         self.velocity += acceleration * dt
         self.position += self.velocity * dt
 
+        # 위치 값의 스케일링 확인
+        # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
+        scaling_factor = 0.1
+        self.position *= scaling_factor
+
         # 회전 변환 계산
         roll = math.atan2(accel_y, accel_z)
         pitch = math.atan2(-accel_x, math.sqrt(accel_y * accel_y + accel_z * accel_z))

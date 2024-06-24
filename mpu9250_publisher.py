@@ -52,7 +52,7 @@ class MPU9250Publisher(Node):
         pitch = math.atan2(-accel_x, math.sqrt(accel_y * accel_y + accel_z * accel_z))
         yaw = 0.0  # Yaw는 자이로스코프 데이터를 적분하여 계산해야 하지만 여기서는 생략합니다.
 
-        # 쿼터니언 계산
+        # 쿼터니언 계산 - test
         cy = math.cos(yaw * 0.5)
         sy = math.sin(yaw * 0.5)
         cp = math.cos(pitch * 0.5)

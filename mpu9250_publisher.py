@@ -20,6 +20,7 @@ class MPU9250Publisher(Node):
         self.position = np.zeros(3)
         self.velocity = np.zeros(3)
         self.last_time = self.get_clock().now()
+        self.yaw = 0.0
 
     def read_i2c_word(self, reg):
         high = self.bus.read_byte_data(self.address, reg)
@@ -66,11 +67,11 @@ class MPU9250Publisher(Node):
         # 회전 변환 계산
         roll = math.atan2(accel_y, accel_z)
         pitch = math.atan2(-accel_x, math.sqrt(accel_y * accel_y + accel_z * accel_z))
-        yaw = 0.0  # Yaw는 자이로스코프 데이터를 적분하여 계산해야 하지만 여기서는 생략합니다.
+        self.yaw += gyro_z * dt
 
         # 쿼터니언 계산
-        cy = math.cos(yaw * 0.5)
-        sy = math.sin(yaw * 0.5)
+        cy = math.cos(self.yaw * 0.5)
+        sy = math.sin(self.yaw * 0.5)
         cp = math.cos(pitch * 0.5)
         sp = math.sin(pitch * 0.5)
         cr = math.cos(roll * 0.5)

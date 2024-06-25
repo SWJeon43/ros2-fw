@@ -12,7 +12,7 @@ class MPU9250Publisher(Node):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        timer_period = 5  # 10Hz
+        timer_period = 60  # 10Hz
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.bus = smbus2.SMBus(1)
         self.address = 0x68

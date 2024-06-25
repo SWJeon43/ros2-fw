@@ -18,8 +18,8 @@ class MPU9250Publisher(Node):
         self.bus = smbus2.SMBus(1)
         self.address = 0x68
         self.bus.write_byte_data(self.address, 0x6B, 0)
-        self.position = np.zeros(3)
-        self.velocity = np.zeros(3)
+        self.position = np.array([0.0, 0.0, 0.0])
+        self.velocity = np.array([0.0, 0.0, 0.0])
         self.last_time = self.get_clock().now()
         self.yaw = 0.0
 
@@ -45,16 +45,13 @@ class MPU9250Publisher(Node):
 
         accel_x = self.read_i2c_word(0x3B) / 16384.0
         accel_y = self.read_i2c_word(0x3D) / 16384.0
-        accel_z = self.read_i2c_word(0x3F) / 16384.0
+        accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1    # 중력 보정
         gyro_x = self.read_i2c_word(0x43) / 131.0
         gyro_y = self.read_i2c_word(0x45) / 131.0
         gyro_z = self.read_i2c_word(0x47) / 131.0
 
-        # 중력 가속도 제거 (필요에 따라 적용)
-        accel_z -= 1.0
-
         imu_msg = Imu()
-        imu_msg.header.stamp = self.get_clock().now().to_msg()
+        imu_msg.header.stamp = current_time.to_msg()
         imu_msg.header.frame_id = 'imu_link'
 
         imu_msg.linear_acceleration.x = accel_x
@@ -71,24 +68,9 @@ class MPU9250Publisher(Node):
         self.get_logger().info(f'Accel: x={accel_x:.3f}, y={accel_y:.3f}, z={accel_z:.3f}')
         self.get_logger().info(f'Gyro: x={gyro_x:.3f}, y={gyro_y:.3f}, z={gyro_z:.3f}')
 
-        # 속도 및 위치 업데이트
-        #acceleration = np.array([accel_x, accel_y, accel_z])
-        #self.velocity += acceleration * dt
-        #self.position += self.velocity * dt
-
-        # 위치 값의 스케일링 확인
-        # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
-        #scaling_factor = 0.1
-        #self.position *= scaling_factor
-
-         # 디버깅 로그 추가
-        #self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
-        #self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
-        #self.get_logger().info()    # 빈줄
-
         # 회전 변환 계산
         roll = math.atan2(accel_y, accel_z)
-        pitch = math.atan2(-accel_x, math.sqrt(accel_y * accel_y + accel_z * accel_z))
+        pitch = math.atan2(-accel_x, math.sqrt(accel_y**2 + accel_z**2))
         self.yaw += gyro_z * dt
         #self.yaw = 0
 
@@ -105,16 +87,31 @@ class MPU9250Publisher(Node):
         qz = cr * cp * sy - sr * sp * cy
         qw = cr * cp * cy + sr * sp * sy
 
+        # 속도 및 위치 업데이트
+        acceleration = np.array([accel_x, accel_y, accel_z])
+        self.velocity += acceleration * dt
+        self.position += self.velocity * dt
+
+        # 위치 값의 스케일링 확인
+        # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
+        #scaling_factor = 0.1
+        #self.position *= scaling_factor
+
+         # 디버깅 로그 추가
+        self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
+        self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
+        self.get_logger().info()    # 빈줄
+
         t = TransformStamped()
-        t.header.stamp = self.get_clock().now().to_msg()
+        t.header.stamp = current_time.to_msg()
         t.header.frame_id = 'world'
         t.child_frame_id = 'imu_link'
-        #t.transform.translation.x = self.position[0]
-        #t.transform.translation.y = self.position[1]
-        #t.transform.translation.z = self.position[2]
-        t.transform.translation.x = 0.0
-        t.transform.translation.y = 0.0
-        t.transform.translation.z = 0.0
+        t.transform.translation.x = self.position[0]
+        t.transform.translation.y = self.position[1]
+        t.transform.translation.z = self.position[2]
+        #t.transform.translation.x = 0.0
+        #t.transform.translation.y = 0.0
+        #t.transform.translation.z = 0.0
         t.transform.rotation.x = qx
         t.transform.rotation.y = qy
         t.transform.rotation.z = qz

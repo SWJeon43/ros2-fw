@@ -59,6 +59,10 @@ class MPU9250Publisher(Node):
 
         self.publisher_.publish(imu_msg)
 
+         # 디버깅 로그 추가
+        self.get_logger().info(f'Accel: x={accel_x:.3f}, y={accel_y:.3f}, z={accel_z:.3f}')
+        self.get_logger().info(f'Gyro: x={gyro_x:.3f}, y={gyro_y:.3f}, z={gyro_z:.3f}')
+
         # 속도 및 위치 업데이트
         acceleration = np.array([accel_x, accel_y, accel_z])
         self.velocity += acceleration * dt
@@ -68,6 +72,10 @@ class MPU9250Publisher(Node):
         # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
         scaling_factor = 0.1
         self.position *= scaling_factor
+
+         # 디버깅 로그 추가
+        self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
+        self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
 
         # 회전 변환 계산
         roll = math.atan2(accel_y, accel_z)

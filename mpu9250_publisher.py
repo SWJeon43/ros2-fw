@@ -6,13 +6,14 @@ from geometry_msgs.msg import TransformStamped
 import smbus2
 import math
 import numpy as np
+import time
 
 class MPU9250Publisher(Node):
     def __init__(self):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        timer_period = 60  # 10Hz
+        timer_period = 10  # 10Hz
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.bus = smbus2.SMBus(1)
         self.address = 0x68
@@ -32,8 +33,15 @@ class MPU9250Publisher(Node):
 
     def timer_callback(self):
         current_time = self.get_clock().now()
+        current_time2 = time.time()
+
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time
+
+        # 시간값 디버그
+        self.get_logger().info(f'current_time: {current_time}')
+        self.get_logger().info(f'current_time2: {current_time2}')
+        self.get_logger().info(f'dt: {dt}')
 
         accel_x = self.read_i2c_word(0x3B) / 16384.0
         accel_y = self.read_i2c_word(0x3D) / 16384.0

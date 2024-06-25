@@ -112,6 +112,9 @@ class MPU9250Publisher(Node):
         #t.transform.translation.x = self.position[0]
         #t.transform.translation.y = self.position[1]
         #t.transform.translation.z = self.position[2]
+        t.transform.translation.x = 0.0
+        t.transform.translation.y = 0.0
+        t.transform.translation.z = 0.0
         t.transform.rotation.x = qx
         t.transform.rotation.y = qy
         t.transform.rotation.z = qz

@@ -80,7 +80,8 @@ class MPU9250Publisher(Node):
         # 회전 변환 계산
         roll = math.atan2(accel_y, accel_z)
         pitch = math.atan2(-accel_x, math.sqrt(accel_y * accel_y + accel_z * accel_z))
-        self.yaw += gyro_z * dt
+        #self.yaw += gyro_z * dt
+        self.yaw = 0
 
         # 쿼터니언 계산
         cy = math.cos(self.yaw * 0.5)

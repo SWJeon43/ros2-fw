@@ -6,14 +6,14 @@ from geometry_msgs.msg import TransformStamped
 import smbus2
 import math
 import numpy as np
-import time
+#import time
 
 class MPU9250Publisher(Node):
     def __init__(self):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        timer_period = 10  # 10Hz
+        timer_period = 1  # 10Hz(origin: 0.1)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.bus = smbus2.SMBus(1)
         self.address = 0x68
@@ -33,15 +33,15 @@ class MPU9250Publisher(Node):
 
     def timer_callback(self):
         current_time = self.get_clock().now()
-        current_time2 = time.time()
+        #current_time2 = time.time()
 
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time
 
         # 시간값 디버그
-        self.get_logger().info(f'current_time: {current_time}')
-        self.get_logger().info(f'current_time2: {current_time2}')
-        self.get_logger().info(f'dt: {dt}')
+        #self.get_logger().info(f'current_time: {current_time}')
+        #self.get_logger().info(f'current_time2: {current_time2}')
+        #self.get_logger().info(f'dt: {dt}')
 
         accel_x = self.read_i2c_word(0x3B) / 16384.0
         accel_y = self.read_i2c_word(0x3D) / 16384.0
@@ -84,6 +84,7 @@ class MPU9250Publisher(Node):
          # 디버깅 로그 추가
         #self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
         #self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
+        #self.get_logger().info()    # 빈줄
 
         # 회전 변환 계산
         roll = math.atan2(accel_y, accel_z)

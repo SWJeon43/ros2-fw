@@ -99,9 +99,9 @@ class MPU9250Publisher(Node):
         t.header.stamp = self.get_clock().now().to_msg()
         t.header.frame_id = 'world'
         t.child_frame_id = 'imu_link'
-        t.transform.translation.x = self.position[0]
-        t.transform.translation.y = self.position[1]
-        t.transform.translation.z = self.position[2]
+        #t.transform.translation.x = self.position[0]
+        #t.transform.translation.y = self.position[1]
+        #t.transform.translation.z = self.position[2]
         t.transform.rotation.x = qx
         t.transform.rotation.y = qy
         t.transform.rotation.z = qz

@@ -6,7 +6,6 @@ from geometry_msgs.msg import TransformStamped
 import smbus2
 import math
 import numpy as np
-#import time
 
 class MPU9250Publisher(Node):
     def __init__(self):
@@ -18,10 +17,17 @@ class MPU9250Publisher(Node):
         self.bus = smbus2.SMBus(1)
         self.address = 0x68
         self.bus.write_byte_data(self.address, 0x6B, 0)
+
+        # 센서 회전 데이터 초기화
+        self.alpha = 0.98   # Complementary filter(상보필터 상수)
+        self.roll = 0.0
+        self.pitch = 0.0
+        self.yaw = 0.0
+        self.last_time = self.get_clock().now()
+
+        # 속도, 위치 데이터 초기화
         self.position = np.array([0.0, 0.0, 0.0])
         self.velocity = np.array([0.0, 0.0, 0.0])
-        self.last_time = self.get_clock().now()
-        self.yaw = 0.0
 
     def read_i2c_word(self, reg):
         high = self.bus.read_byte_data(self.address, reg)
@@ -33,15 +39,8 @@ class MPU9250Publisher(Node):
 
     def timer_callback(self):
         current_time = self.get_clock().now()
-        #current_time2 = time.time()
-
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time
-
-        # 시간값 디버그
-        #self.get_logger().info(f'current_time: {current_time}')
-        #self.get_logger().info(f'current_time2: {current_time2}')
-        #self.get_logger().info(f'dt: {dt}')
 
         accel_x = self.read_i2c_word(0x3B) / 16384.0
         accel_y = self.read_i2c_word(0x3D) / 16384.0
@@ -68,19 +67,27 @@ class MPU9250Publisher(Node):
         self.get_logger().info(f'Accel: x={accel_x:.3f}, y={accel_y:.3f}, z={accel_z:.3f}')
         self.get_logger().info(f'Gyro: x={gyro_x:.3f}, y={gyro_y:.3f}, z={gyro_z:.3f}')
 
-        # 회전 변환 계산
-        roll = math.atan2(accel_y, accel_z)
-        pitch = math.atan2(-accel_x, math.sqrt(accel_y**2 + accel_z**2))
+        # 가속도계를 사용하여 회전 변환(roll, pitch) 계산
+        accel_roll = math.atan2(accel_y, accel_z)
+        accel_pitch = math.atan2(-accel_x, math.sqrt(accel_y**2 + accel_z**2))
+    
+        
+        # 자이로스코프를 사용하여 각도 계산 (적분)
+        gyro_roll = self.roll + gyro_x * dt
+        gyro_pitch = self.pitch + gyro_y * dt
         self.yaw += gyro_z * dt
-        #self.yaw = 0
+
+        # Complementary Filter 적용
+        self.roll = self.alpha * gyro_roll + (1 - self.alpha) * accel_roll
+        self.pitch = self.alpha * gyro_pitch + (1 - self.alpha) * accel_pitch
 
         # 쿼터니언 계산
         cy = math.cos(self.yaw * 0.5)
         sy = math.sin(self.yaw * 0.5)
-        cp = math.cos(pitch * 0.5)
-        sp = math.sin(pitch * 0.5)
-        cr = math.cos(roll * 0.5)
-        sr = math.sin(roll * 0.5)
+        cp = math.cos(self.pitch * 0.5)
+        sp = math.sin(self.pitch * 0.5)
+        cr = math.cos(self.roll * 0.5)
+        sr = math.sin(self.roll * 0.5)
 
         qx = sr * cp * cy - cr * sp * sy
         qy = cr * sp * cy + sr * cp * sy

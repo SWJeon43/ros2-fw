@@ -13,7 +13,7 @@ class MPU9250Publisher(Node):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        timer_period = 1  # 10Hz(origin: 0.1)
+        timer_period = 0.1  # 10Hz(origin: 0.1)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.bus = smbus2.SMBus(1)
         self.address = 0x68
@@ -94,13 +94,13 @@ class MPU9250Publisher(Node):
 
         # 위치 값의 스케일링 확인
         # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
-        #scaling_factor = 0.1
-        #self.position *= scaling_factor
+        scaling_factor = 0.1
+        self.position *= scaling_factor
 
          # 디버깅 로그 추가
         self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
         self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
-        self.get_logger().info()    # 빈줄
+        self.get_logger().info(f'')    # 빈줄
 
         t = TransformStamped()
         t.header.stamp = current_time.to_msg()

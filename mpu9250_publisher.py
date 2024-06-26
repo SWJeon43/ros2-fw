@@ -42,9 +42,11 @@ class MPU9250Publisher(Node):
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time
 
+        # 센서 raw 데이터 추출
         accel_x = self.read_i2c_word(0x3B) / 16384.0
         accel_y = self.read_i2c_word(0x3D) / 16384.0
         accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1    # 중력 보정
+
         gyro_x = self.read_i2c_word(0x43) / 131.0
         gyro_y = self.read_i2c_word(0x45) / 131.0
         gyro_z = self.read_i2c_word(0x47) / 131.0
@@ -75,11 +77,14 @@ class MPU9250Publisher(Node):
         # 자이로스코프를 사용하여 각도 계산 (적분)
         gyro_roll = self.roll + gyro_x * dt
         gyro_pitch = self.pitch + gyro_y * dt
-        self.yaw += gyro_z * dt
 
         # Complementary Filter 적용
         self.roll = self.alpha * gyro_roll + (1 - self.alpha) * accel_roll
         self.pitch = self.alpha * gyro_pitch + (1 - self.alpha) * accel_pitch
+
+        # Yaw 보정 (이 단순 보정은 실제 환경에 따라 조정이 필요할 수 있습니다)
+        self.yaw += gyro_z * dt
+        self.yaw = self.yaw % (2 * math.pi)  # -pi to pi 범위 유지
 
         # 쿼터니언 계산
         cy = math.cos(self.yaw * 0.5)

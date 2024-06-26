@@ -96,13 +96,13 @@ class MPU9250Publisher(Node):
 
         # 속도 및 위치 업데이트
         acceleration = np.array([accel_x, accel_y, accel_z])
-        self.velocity += acceleration * dt
-        self.position += self.velocity * dt
+        #self.velocity += acceleration * dt
+        #self.position += self.velocity * dt
 
         # 위치 값의 스케일링 확인
         # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
-        scaling_factor = 0.1
-        self.position *= scaling_factor
+        #scaling_factor = 0.1
+        #self.position *= scaling_factor
 
          # 디버깅 로그 추가
         self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
@@ -113,9 +113,9 @@ class MPU9250Publisher(Node):
         t.header.stamp = current_time.to_msg()
         t.header.frame_id = 'world'
         t.child_frame_id = 'imu_link'
-        t.transform.translation.x = self.position[0]
-        t.transform.translation.y = self.position[1]
-        t.transform.translation.z = self.position[2]
+        #t.transform.translation.x = self.position[0]
+        #t.transform.translation.y = self.position[1]
+        #t.transform.translation.z = self.position[2]
         #t.transform.translation.x = 0.0
         #t.transform.translation.y = 0.0
         #t.transform.translation.z = 0.0

@@ -11,10 +11,10 @@ import numpy as np
 #from mpu9250_jmdev.mpu_9250 import MPU9250
 
 class MPU9250:
-    def __init__(self, bus_num=1, address=0x68, address_ak=0x0C):
+    def __init__(self, bus_num=1, address=0x68):
         self.bus = smbus2.SMBus(bus_num)
         self.address = address
-        self.address_ak = address_ak  # Magnetometer I2C address
+        self.address_ak = 0x0C  # Magnetometer I2C address
 
         # Power up the MPU9250
         self.bus.write_byte_data(self.address, 0x6B, 0x00)
@@ -48,22 +48,28 @@ class MPU9250:
         self.configure_magnetometer()
 
     def configure_magnetometer(self):
-        # Power down magnetometer
-        self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
-        time.sleep(0.1)
+        try:
+            # Power down magnetometer
+            self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
+            time.sleep(0.1)
 
-        # Enter fuse ROM access mode
-        self.bus.write_byte_data(self.address_ak, 0x0A, 0x0F)
-        time.sleep(0.1)
+            # Enter fuse ROM access mode
+            self.bus.write_byte_data(self.address_ak, 0x0A, 0x0F)
+            time.sleep(0.1)
 
-        # Set magnetometer resolution
-        mfs_sel = 0x10  # MFS_16BITS
-        self.bus.write_byte_data(self.address_ak, 0x0A, mfs_sel)
-        time.sleep(0.1)
+            # Set magnetometer resolution
+            mfs_sel = 0x10  # MFS_16BITS
+            self.bus.write_byte_data(self.address_ak, 0x0A, mfs_sel)
+            time.sleep(0.1)
 
-        # Set continuous measurement mode
-        self.bus.write_byte_data(self.address_ak, 0x0A, 0x16)
-        time.sleep(0.1)
+            # Set continuous measurement mode
+            self.bus.write_byte_data(self.address_ak, 0x0A, 0x16)
+            time.sleep(0.1)
+
+        except OSError as e:
+            print(f"Failed to configure magnetometer: {e}")
+            # Optional: Re-raise the exception or handle it as needed
+            raise e
 
     def read_i2c_word(self, reg):
         high = self.bus.read_byte_data(self.address, reg)

@@ -10,51 +10,48 @@ import numpy as np
 #from mpu9250_jmdev.registers import *
 #from mpu9250_jmdev.mpu_9250 import MPU9250
 
-class MPU9250Publisher(Node):
-    def __init__(self):
-        super().__init__('mpu9250_publisher')
-        self.publisher_ = self.create_publisher(Imu, 'imu', 10)
-        self.tf_broadcaster = TransformBroadcaster(self)
-        self.timer_period = 0.1  # 10Hz(origin: 0.1)
-        self.timer = self.create_timer(self.timer_period, self.timer_callback)
-        self.bus = smbus2.SMBus(1)
-        self.address = 0x68
-        
-        # MPU9250 초기 설정
-        self.bus.write_byte_data(self.address, 0x6B, 0x00)  # Wake up the MPU-9250
+class MPU9250:
+    def __init__(self, bus_num=1, address=0x68):
+        self.bus = smbus2.SMBus(bus_num)
+        self.address = address
+        self.address_ak = 0x0C  # Magnetometer I2C address
+
+        # Power up the MPU9250
+        self.bus.write_byte_data(self.address, 0x6B, 0x00)
         time.sleep(0.1)
 
-        # MPU9250 초기화
-        #self.mpu = MPU9250(
-        #    address_ak=AK8963_ADDRESS,
-        #    address_mpu_master=MPU9050_ADDRESS_68,
-        #    address_mpu_slave=None,
-        #    bus=1,
-        #    gfs=GFS_250,   # 자이로 풀 스케일 설정: ±250dps
-        #    afs=AFS_2G,    # 가속도 풀 스케일 설정: ±2g
-        #    mfs=AK8963_BIT_16,  # 자력계 풀 스케일 설정: 16-bit
-        #    mode=AK8963_MODE_C100HZ
-        #)
+        # Accelerometer configuration
+        #afs_sel = 0x00  # AFS_2G
+        afs_sel = 0x08  # AFS_4G
+        self.bus.write_byte_data(self.address, 0x1C, afs_sel)
+        time.sleep(0.1)
 
-        #self.mpu.calibrate()  # 보정
-        #self.mpu.configure()  # 설정
-        #self.madgwick = MadgwickAHRS(sampleperiod=timer_period)
+        # Gyroscope configuration
+        #gfs_sel = 0x00  # GFS_250DPS
+        gfs_sel = 0x08  # GFS_500DPS
+        self.bus.write_byte_data(self.address, 0x1B, gfs_sel)
+        time.sleep(0.1)
 
-        self.last_time = self.get_clock().now()
-        self.velocity = np.array([0.0, 0.0, 0.0])
-        self.position = np.array([0.0, 0.0, 0.0])
-        self.beta = 0.1
-        self.q = np.array([1.0, 0.0, 0.0, 0.0])
+        # Magnetometer configuration
+        self.configure_magnetometer()
 
-        # 센서 회전 데이터 초기화
-        #self.alpha = 0.98   # Complementary filter(상보필터 상수)
-        #self.roll = 0.0
-        #self.pitch = 0.0
-        #self.yaw = 0.0
+    def configure_magnetometer(self):
+        # Power down magnetometer
+        self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
+        time.sleep(0.1)
 
-        # 속도, 위치 데이터 초기화
-        #self.position = np.array([0.0, 0.0, 0.0])
-        #self.velocity = np.array([0.0, 0.0, 0.0])
+        # Enter fuse ROM access mode
+        self.bus.write_byte_data(self.address_ak, 0x0A, 0x0F)
+        time.sleep(0.1)
+
+        # Set magnetometer resolution
+        mfs_sel = 0x10  # MFS_16BITS
+        self.bus.write_byte_data(self.address_ak, 0x0A, mfs_sel)
+        time.sleep(0.1)
+
+        # Set continuous measurement mode
+        self.bus.write_byte_data(self.address_ak, 0x0A, 0x16)
+        time.sleep(0.1)
 
     def read_i2c_word(self, reg):
         high = self.bus.read_byte_data(self.address, reg)
@@ -64,6 +61,17 @@ class MPU9250Publisher(Node):
             value = -((65535 - value) + 1)
         return value
 
+    def get_motion_data(self):
+        accel_x = self.read_i2c_word(0x3B) / 8192.0  # AFS_4G
+        accel_y = self.read_i2c_word(0x3D) / 8192.0
+        accel_z = self.read_i2c_word(0x3F) / 8192.0
+
+        gyro_x = self.read_i2c_word(0x43) / 65.5  # GFS_500DPS
+        gyro_y = self.read_i2c_word(0x45) / 65.5
+        gyro_z = self.read_i2c_word(0x47) / 65.5
+
+        return accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z
+    
     def madgwick_filter_update(self, gx, gy, gz, ax, ay, az):
         q1, q2, q3, q4 = self.q
         norm = np.sqrt(ax * ax + ay * ay + az * az)
@@ -101,35 +109,34 @@ class MPU9250Publisher(Node):
         self.q += q_dot * self.timer_period
         self.q = self.q / np.linalg.norm(self.q)
 
+class MPU9250Publisher(Node):
+    def __init__(self):
+        super().__init__('mpu9250_publisher')
+        self.publisher_ = self.create_publisher(Imu, 'imu', 10)
+        self.tf_broadcaster = TransformBroadcaster(self)
+        self.mpu = MPU9250()
+        self.timer_period = 0.1  # 10Hz(origin: 0.1)
+        self.timer = self.create_timer(self.timer_period, self.timer_callback)
+
+        self.last_time = self.get_clock().now()
+        self.velocity = np.array([0.0, 0.0, 0.0])
+        self.position = np.array([0.0, 0.0, 0.0])
+        self.beta = 0.1
+        self.q = np.array([1.0, 0.0, 0.0, 0.0])
+
     def timer_callback(self):
         current_time = self.get_clock().now()
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time
 
-#########################################################
-
-        # MPU9250 데이터 읽기
-        #self.mpu.read_all()
-        #accel = self.mpu.accel
-        #gyro = self.mpu.gyro
-
-        #accel_x, accel_y, accel_z = accel[0], accel[1], accel[2] - 1.0
-        #gyro_x, gyro_y, gyro_z = np.deg2rad(gyro[0]), np.deg2rad(gyro[1]), np.deg2rad(gyro[2])  # 각속도 단위를 rad/s로 변환
-
-#########################################################
-
-        # 센서 raw 데이터 추출
-        accel_x = self.read_i2c_word(0x3B) / 16384.0
-        accel_y = self.read_i2c_word(0x3D) / 16384.0
-        accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1    # 중력 보정
-
-        gyro_x = self.read_i2c_word(0x43) / 131.0
-        gyro_y = self.read_i2c_word(0x45) / 131.0
-        gyro_z = self.read_i2c_word(0x47) / 131.0
-
         imu_msg = Imu()
         imu_msg.header.stamp = current_time.to_msg()
         imu_msg.header.frame_id = 'imu_link'
+
+        accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z = self.get_motion_data()
+        self.mpu.madgwick_filter_update(np.radians(gyro_x), np.radians(gyro_y), np.radians(gyro_z),
+                                 accel_x, accel_y, accel_z)
+        q = self.q
 
         imu_msg.linear_acceleration.x = accel_x
         imu_msg.linear_acceleration.y = accel_y
@@ -175,8 +182,8 @@ class MPU9250Publisher(Node):
         #qw = cr * cp * cy + sr * sp * sy
 
         # Madgwick 필터 업데이트
-        self.madgwick_filter_update(gyro_x, gyro_y, gyro_z, accel_x, accel_y, accel_z)
-        q = self.q
+        #self.madgwick_filter_update(gyro_x, gyro_y, gyro_z, accel_x, accel_y, accel_z)
+        #q = self.q
 
         # 속도 및 위치 업데이트
         acceleration = np.array([accel_x, accel_y, accel_z])

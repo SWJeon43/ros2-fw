@@ -11,23 +11,35 @@ import numpy as np
 #from mpu9250_jmdev.mpu_9250 import MPU9250
 
 class MPU9250:
-    def __init__(self, bus_num=1, address=0x68):
+    def __init__(self, bus_num=1, address=0x68, address_ak=0x0C):
         self.bus = smbus2.SMBus(bus_num)
         self.address = address
-        self.address_ak = 0x0C  # Magnetometer I2C address
+        self.address_ak = address_ak  # Magnetometer I2C address
 
         # Power up the MPU9250
         self.bus.write_byte_data(self.address, 0x6B, 0x00)
         time.sleep(0.1)
 
         # Accelerometer configuration
-        #afs_sel = 0x00  # AFS_2G
+        '''
+        Accel Range(2G)     : 0x00
+        Accel Range(4G)     : 0x08
+        Accel Range(8G)     : 0x10
+        Accel Range(16G)    : 0x18
+        '''
+        
         afs_sel = 0x08  # AFS_4G
         self.bus.write_byte_data(self.address, 0x1C, afs_sel)
         time.sleep(0.1)
 
         # Gyroscope configuration
-        #gfs_sel = 0x00  # GFS_250DPS
+        '''
+        Gyro Range(250DPS)  : 0x00
+        Gyro Range(500DPS)  : 0x08
+        Gyro Range(1000DPS) : 0x10
+        Gyro Range(2000DPS) : 0x18
+        '''
+
         gfs_sel = 0x08  # GFS_500DPS
         self.bus.write_byte_data(self.address, 0x1B, gfs_sel)
         time.sleep(0.1)
@@ -62,6 +74,19 @@ class MPU9250:
         return value
 
     def get_motion_data(self):
+        # Scale value
+        '''
+        AFS_2G  : 16384.0
+        AFS_4G  : 8192.0
+        AFS_8G  : 4096.0
+        AFS_16G : 2048.0
+
+        GFS_250DPS  : 131.0
+        GFS_500DPS  : 65.5
+        GFS_1000DPS : 32.8
+        GFS_2000DPS : 16.4
+        '''
+
         accel_x = self.read_i2c_word(0x3B) / 8192.0  # AFS_4G
         accel_y = self.read_i2c_word(0x3D) / 8192.0
         accel_z = self.read_i2c_word(0x3F) / 8192.0

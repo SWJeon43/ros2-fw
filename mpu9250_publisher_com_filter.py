@@ -14,7 +14,7 @@ class MPU9250Publisher(Node):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        timer_period = 1  # 10Hz(origin: 0.1)
+        timer_period = 0.1  # 10Hz(origin: 0.1)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.bus = smbus2.SMBus(1)
         self.address = 0x68
@@ -67,23 +67,19 @@ class MPU9250Publisher(Node):
         accel = self.mpu.accel
         gyro = self.mpu.gyro
 
-        accel_xx, accel_yy, accel_zz = accel[0], accel[1], accel[2] - 1.0
-        gyro_xx, gyro_yy, gyro_zz = np.deg2rad(gyro[0]), np.deg2rad(gyro[1]), np.deg2rad(gyro[2])  # 각속도 단위를 rad/s로 변환
-
-        # 디버깅 로그 추가
-        self.get_logger().info(f'Accel: x={accel_xx:.3f}, y={accel_yy:.3f}, z={accel_zz:.3f}')
-        self.get_logger().info(f'Gyro: x={gyro_xx:.3f}, y={gyro_yy:.3f}, z={gyro_zz:.3f}')
+        accel_x, accel_y, accel_z = accel[0], accel[1], accel[2] - 1.0
+        gyro_x, gyro_y, gyro_z = np.deg2rad(gyro[0]), np.deg2rad(gyro[1]), np.deg2rad(gyro[2])  # 각속도 단위를 rad/s로 변환
 
 #########################################################
 
         # 센서 raw 데이터 추출
-        accel_x = self.read_i2c_word(0x3B) / 16384.0
-        accel_y = self.read_i2c_word(0x3D) / 16384.0
-        accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1    # 중력 보정
+        #accel_x = self.read_i2c_word(0x3B) / 16384.0
+        #accel_y = self.read_i2c_word(0x3D) / 16384.0
+        #accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1    # 중력 보정
 
-        gyro_x = self.read_i2c_word(0x43) / 131.0
-        gyro_y = self.read_i2c_word(0x45) / 131.0
-        gyro_z = self.read_i2c_word(0x47) / 131.0
+        #gyro_x = self.read_i2c_word(0x43) / 131.0
+        #gyro_y = self.read_i2c_word(0x45) / 131.0
+        #gyro_z = self.read_i2c_word(0x47) / 131.0
 
         imu_msg = Imu()
         imu_msg.header.stamp = current_time.to_msg()

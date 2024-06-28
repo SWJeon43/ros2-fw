@@ -9,16 +9,16 @@ import time
 import numpy as np
 #from mpu9250_jmdev.registers import *
 #from mpu9250_jmdev.mpu_9250 import MPU9250
-import MPU9250
-import MadgwickAHRS
+import MPU9250 as mpu9250
+import MadgwickAHRS as madgwick_filter
 
 class MPU9250Publisher(Node):
     def __init__(self):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        self.madgwick = MadgwickAHRS(sampleperiod=0.1)
-        self.mpu = MPU9250()
+        self.madgwick = madgwick_filter.MadgwickAHRS(sampleperiod=0.1)
+        self.mpu = mpu9250.MPU9250()
 
         timer_period = 0.1  # 10Hz(origin: 0.1)
         self.timer = self.create_timer(timer_period, self.timer_callback)

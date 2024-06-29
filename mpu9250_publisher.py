@@ -220,6 +220,20 @@ class MPU9250Publisher(Node):
         self.velocity += corrected_acceleration * dt
         self.position += self.velocity * dt
 
+        # 디버깅 로그 추가
+        self.get_logger().info(f'Accel: x={accel_x:.3f}, y={accel_y:.3f}, z={accel_z:.3f}')
+        self.get_logger().info(f'Gyro: x={gyro_x:.3f}, y={gyro_y:.3f}, z={gyro_z:.3f}')
+
+        # 위치 값의 스케일링 확인
+        # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
+        scaling_factor = 0.1
+        self.position *= scaling_factor
+
+         # 디버깅 로그 추가
+        #self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
+        #self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
+        self.get_logger().info(f'')    # 빈줄
+
         # imu 퍼블리셔에 데이터 셋팅
         imu_msg = Imu()
         imu_msg.header.stamp = current_time.to_msg()
@@ -239,20 +253,6 @@ class MPU9250Publisher(Node):
         imu_msg.orientation.w = q[0]
 
         self.publisher_.publish(imu_msg)
-
-        # 디버깅 로그 추가
-        self.get_logger().info(f'Accel: x={accel_x:.3f}, y={accel_y:.3f}, z={accel_z:.3f}')
-        self.get_logger().info(f'Gyro: x={gyro_x:.3f}, y={gyro_y:.3f}, z={gyro_z:.3f}')
-
-        # 위치 값의 스케일링 확인
-        # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
-        #scaling_factor = 0.1
-        #self.position *= scaling_factor
-
-         # 디버깅 로그 추가
-        #self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
-        #self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
-        self.get_logger().info(f'')    # 빈줄
 
         # tf 브로드캐스터에 데이터 셋팅
         t = TransformStamped()

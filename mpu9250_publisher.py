@@ -9,16 +9,176 @@ import time
 import numpy as np
 #from mpu9250_jmdev.registers import *
 #from mpu9250_jmdev.mpu_9250 import MPU9250
-import MPU9250 as mpu9250
-import MadgwickAHRS as madgwick_filter
+
+class MadgwickAHRS:
+    def __init__(self, sample_period=1/256, beta=0.1):
+        self.sample_period = sample_period
+        self.beta = beta
+        self.q = np.array([1, 0, 0, 0], dtype=np.float64)  # initial quaternion
+
+    def update_imu(self, gx, gy, gz, ax, ay, az):
+        q1, q2, q3, q4 = self.q
+        
+        norm = np.sqrt(ax * ax + ay * ay + az * az)
+        if norm == 0:
+            return
+        norm = 1 / norm
+        ax *= norm
+        ay *= norm
+        az *= norm
+
+        _2q1 = 2 * q1
+        _2q2 = 2 * q2
+        _2q3 = 2 * q3
+        _2q4 = 2 * q4
+        _4q1 = 4 * q1
+        _4q2 = 4 * q2
+        _4q3 = 4 * q3
+        _8q2 = 8 * q2
+        _8q3 = 8 * q3
+        q1q1 = q1 * q1
+        q2q2 = q2 * q2
+        q3q3 = q3 * q3
+        q4q4 = q4 * q4
+
+        s1 = _4q1 * q3q3 + _2q3 * ax + _4q1 * q2q2 - _2q2 * ay
+        s2 = _4q2 * q4q4 - _2q4 * ax + 4 * q1q1 * q2 - _2q1 * ay - _4q2 + _8q2 * q2q2 + _8q2 * q3q3 + _4q2 * az
+        s3 = 4 * q1q1 * q3 + _2q1 * ax + _4q3 * q4q4 - _2q4 * ay - _4q3 + _8q3 * q2q2 + _8q3 * q3q3 + _4q3 * az
+        s4 = 4 * q2q2 * q4 - _2q2 * ax + 4 * q3q3 * q4 - _2q3 * ay
+
+        norm = 1 / np.sqrt(s1 * s1 + s2 * s2 + s3 * s3 + s4 * s4)
+        s1 *= norm
+        s2 *= norm
+        s3 *= norm
+        s4 *= norm
+
+        q_dot1 = 0.5 * (-q2 * gx - q3 * gy - q4 * gz) - self.beta * s1
+        q_dot2 = 0.5 * (q1 * gx + q3 * gz - q4 * gy) - self.beta * s2
+        q_dot3 = 0.5 * (q1 * gy - q2 * gz + q4 * gx) - self.beta * s3
+        q_dot4 = 0.5 * (q1 * gz + q2 * gy - q3 * gx) - self.beta * s4
+
+        q1 += q_dot1 * self.sample_period
+        q2 += q_dot2 * self.sample_period
+        q3 += q_dot3 * self.sample_period
+        q4 += q_dot4 * self.sample_period
+
+        norm = 1 / np.sqrt(q1 * q1 + q2 * q2 + q3 * q3 + q4 * q4)
+        self.q = np.array([q1 * norm, q2 * norm, q3 * norm, q4 * norm])
+
+    @property
+    def quaternion(self):
+        return self.q
+
+class MPU9250:
+    def __init__(self, bus_num=1, address=0x68):
+        self.bus = smbus2.SMBus(bus_num)
+        self.address = address
+        self.address_ak = 0x0C  # Magnetometer I2C address
+
+        # Power up the MPU9250
+        self.bus.write_byte_data(self.address, 0x6B, 0x00)
+        time.sleep(0.1)
+
+        # Accelerometer configuration
+        '''
+        Accel Range(2G)     : 0x00
+        Accel Range(4G)     : 0x08
+        Accel Range(8G)     : 0x10
+        Accel Range(16G)    : 0x18
+        '''
+        
+        afs_sel = 0x08  # AFS_4G
+        self.bus.write_byte_data(self.address, 0x1C, afs_sel)
+        time.sleep(0.1)
+
+        # Gyroscope configuration
+        '''
+        Gyro Range(250DPS)  : 0x00
+        Gyro Range(500DPS)  : 0x08
+        Gyro Range(1000DPS) : 0x10
+        Gyro Range(2000DPS) : 0x18
+        '''
+
+        gfs_sel = 0x08  # GFS_500DPS
+        self.bus.write_byte_data(self.address, 0x1B, gfs_sel)
+        time.sleep(0.1)
+
+        # Magnetometer configuration
+        self.configure_magnetometer()
+
+    def configure_magnetometer(self):
+        try:
+            # Power down magnetometer
+            self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
+            time.sleep(0.1)
+
+            # Enter fuse ROM access mode
+            self.bus.write_byte_data(self.address_ak, 0x0A, 0x0F)
+            time.sleep(0.1)
+
+            # Read sensitivity adjustment values from fuse ROM
+            asax = self.bus.read_byte_data(self.address_ak, 0x10)
+            asay = self.bus.read_byte_data(self.address_ak, 0x11)
+            asaz = self.bus.read_byte_data(self.address_ak, 0x12)
+
+            # Calculate sensitivity adjustment values
+            self.mag_sensitivity = np.array([(asax - 128) / 256.0 + 1.0,
+                                             (asay - 128) / 256.0 + 1.0,
+                                             (asaz - 128) / 256.0 + 1.0])
+
+            # Set magnetometer resolution
+            mfs_sel = 0x10  # MFS_16BITS
+            self.bus.write_byte_data(self.address_ak, 0x0A, mfs_sel)
+            time.sleep(0.1)
+
+            # Set continuous measurement mode
+            self.bus.write_byte_data(self.address_ak, 0x0A, 0x16)
+            time.sleep(0.1)
+
+        except OSError as e:
+            print(f"Failed to configure magnetometer: {e}")
+            # Optional: Re-raise the exception or handle it as needed
+            raise e
+
+    def read_i2c_word(self, reg):
+        high = self.bus.read_byte_data(self.address, reg)
+        low = self.bus.read_byte_data(self.address, reg + 1)
+        value = (high << 8) + low
+        if value >= 0x8000:
+            value = -((65535 - value) + 1)
+        return value
+
+    def get_motion_data(self):
+        # Scale value
+        '''
+        AFS_2G  : 16384.0
+        AFS_4G  : 8192.0
+        AFS_8G  : 4096.0
+        AFS_16G : 2048.0
+
+        GFS_250DPS  : 131.0
+        GFS_500DPS  : 65.5
+        GFS_1000DPS : 32.8
+        GFS_2000DPS : 16.4
+        '''
+
+        accel_x = self.read_i2c_word(0x3B) / 8192.0  # AFS_4G
+        accel_y = self.read_i2c_word(0x3D) / 8192.0
+        accel_z = self.read_i2c_word(0x3F) / 8192.0
+
+        gyro_x = self.read_i2c_word(0x43) / 65.5  # GFS_500DPS
+        gyro_y = self.read_i2c_word(0x45) / 65.5
+        gyro_z = self.read_i2c_word(0x47) / 65.5
+
+        return accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z
 
 class MPU9250Publisher(Node):
     def __init__(self):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        self.madgwick = madgwick_filter.MadgwickAHRS(sampleperiod=0.1)
-        self.mpu = mpu9250.MPU9250()
+        self.madgwick = MadgwickAHRS(sampleperiod=0.1)
+        self.mpu = MPU9250()
 
         timer_period = 0.1  # 10Hz(origin: 0.1)
         self.timer = self.create_timer(timer_period, self.timer_callback)

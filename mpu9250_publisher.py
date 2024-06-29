@@ -188,7 +188,7 @@ class MPU9250Publisher(Node):
         self.madgwick = MadgwickAHRS(sample_period=0.1)
         self.mpu = MPU9250()
 
-        timer_period = 0.1  # 10Hz(origin: 0.1)
+        timer_period = 0.01  # 10Hz(origin: 0.1)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.last_time = self.get_clock().now()
 

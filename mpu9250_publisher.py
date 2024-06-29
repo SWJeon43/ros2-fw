@@ -111,7 +111,7 @@ class MPU9250:
         time.sleep(0.1)
 
         # Magnetometer configuration
-        self.configure_magnetometer()
+        #self.configure_magnetometer()
 
     def configure_magnetometer(self):
         try:

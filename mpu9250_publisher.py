@@ -94,7 +94,7 @@ class MPU9250:
         Accel Range(16G)    : 0x18
         '''
         
-        afs_sel = 0x10  # AFS_4G
+        afs_sel = 0x00  # AFS_4G
         self.bus.write_byte_data(self.address, 0x1C, afs_sel)
         time.sleep(0.1)
 
@@ -106,7 +106,7 @@ class MPU9250:
         Gyro Range(2000DPS) : 0x18
         '''
 
-        gfs_sel = 0x10  # GFS_500DPS
+        gfs_sel = 0x00  # GFS_500DPS
         self.bus.write_byte_data(self.address, 0x1B, gfs_sel)
         time.sleep(0.1)
 
@@ -170,13 +170,13 @@ class MPU9250:
         GFS_2000DPS : 16.4
         '''
 
-        accel_x = self.read_i2c_word(0x3B) / 4096.0  # AFS_4G
-        accel_y = self.read_i2c_word(0x3D) / 4096.0
-        accel_z = self.read_i2c_word(0x3F) / 4096.0
+        accel_x = self.read_i2c_word(0x3B) / 16384.0  # AFS_4G
+        accel_y = self.read_i2c_word(0x3D) / 16384.0
+        accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1
 
-        gyro_x = self.read_i2c_word(0x43) / 32.8  # GFS_500DPS
-        gyro_y = self.read_i2c_word(0x45) / 32.8
-        gyro_z = self.read_i2c_word(0x47) / 32.8
+        gyro_x = self.read_i2c_word(0x43) / 131.0  # GFS_500DPS
+        gyro_y = self.read_i2c_word(0x45) / 131.0
+        gyro_z = self.read_i2c_word(0x47) / 131.0
 
         return accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z
 

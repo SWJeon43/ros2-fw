@@ -109,6 +109,7 @@ class MPU9250:
     def configure_magnetometer(self):
         try:
             # Power down magnetometer
+            print("address: %x, address_ak: %x" % self.address, self.address_ak)
             self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
             time.sleep(0.1)
 
@@ -177,7 +178,7 @@ class MPU9250Publisher(Node):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        self.madgwick = MadgwickAHRS(sampleperiod=0.1)
+        self.madgwick = MadgwickAHRS(sample_period=0.1)
         self.mpu = MPU9250()
 
         timer_period = 0.1  # 10Hz(origin: 0.1)

@@ -109,7 +109,7 @@ class MPU9250:
     def configure_magnetometer(self):
         try:
             # Power down magnetometer
-            print("address: %x, address_ak: %x" % self.address, self.address_ak)
+            print("address: %x, address_ak: %x" % (self.address, self.address_ak))
             self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
             time.sleep(0.1)
 

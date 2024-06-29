@@ -75,12 +75,12 @@ class MPU9250:
         self.address = address
         self.address_ak = 0x0C  # Magnetometer I2C address
 
-        for addr in range(0x03, 0x78):
-            try:
-                self.bus.write_quick(addr)
-                print(f"Found device at address: 0x{addr:02X}")
-            except OSError:
-                pass
+        #for addr in range(0x03, 0x78):
+        #    try:
+        #        self.bus.write_quick(addr)
+        #        print(f"Found device at address: 0x{addr:02X}")
+        #    except OSError:
+        #        pass
 
         # Power up the MPU9250
         self.bus.write_byte_data(self.address, 0x6B, 0x00)
@@ -202,7 +202,7 @@ class MPU9250Publisher(Node):
 
         # 가속도, 각속도 데이터 업데이트
         accel_x, accel_y, accel_z, \
-            gyro_x, gyro_y, gyro_z = self.get_motion_data()
+            gyro_x, gyro_y, gyro_z = self.mpu.get_motion_data()
 
         # madgwick 필터 적용
         self.madgwick.update_imu(np.radians(gyro_x), np.radians(gyro_y), np.radians(gyro_z),

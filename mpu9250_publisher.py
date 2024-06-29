@@ -75,6 +75,13 @@ class MPU9250:
         self.address = address
         self.address_ak = 0x0C  # Magnetometer I2C address
 
+        for addr in range(0x03, 0x78):
+            try:
+                self.bus.write_quick(addr)
+                print(f"Found device at address: 0x{addr:02X}")
+            except OSError:
+                pass
+
         # Power up the MPU9250
         self.bus.write_byte_data(self.address, 0x6B, 0x00)
         time.sleep(0.1)
@@ -109,7 +116,7 @@ class MPU9250:
     def configure_magnetometer(self):
         try:
             # Power down magnetometer
-            print("address: %x, address_ak: %x" % (self.address, self.address_ak))
+            #print("address: %x, address_ak: %x" % (self.address, self.address_ak))
             self.bus.write_byte_data(self.address_ak, 0x0A, 0x00)
             time.sleep(0.1)
 

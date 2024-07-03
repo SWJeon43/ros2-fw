@@ -75,6 +75,11 @@ class MPU9250:
         self.address = address
         self.address_ak = 0x0C  # Magnetometer I2C address
 
+        self.gyro_offset = np.zeros(3)
+        self.accel_offset = np.zeros(3)
+        self.calibrate_sensors()
+
+        # 파이의 I2C 통신 장치 주소 확인하는 테스트코드(i2cdetect 사용 안할시)
         #for addr in range(0x03, 0x78):
         #    try:
         #        self.bus.write_quick(addr)
@@ -170,27 +175,44 @@ class MPU9250:
         GFS_2000DPS : 16.4
         '''
 
-        accel_x = self.read_i2c_word(0x3B) / 16384.0  # AFS_4G
-        accel_y = self.read_i2c_word(0x3D) / 16384.0
-        accel_z = self.read_i2c_word(0x3F) / 16384.0 - 1
-
-        gyro_x = self.read_i2c_word(0x43) / 131.0  # GFS_500DPS
-        gyro_y = self.read_i2c_word(0x45) / 131.0
-        gyro_z = self.read_i2c_word(0x47) / 131.0
+        # AFS_4G
+        accel_x = self.read_i2c_word(0x3B) / 8192.0 - self.accel_offset[0]    
+        accel_y = self.read_i2c_word(0x3D) / 8192.0 - self.accel_offset[1]
+        accel_z = self.read_i2c_word(0x3F) / 8192.0 - self.accel_offset[2] #- 1
+        
+        # GFS_500DPS
+        gyro_x = self.read_i2c_word(0x43) / 65.5 - self.gyro_offset[0]
+        gyro_y = self.read_i2c_word(0x45) / 65.5 - self.gyro_offset[1]
+        gyro_z = self.read_i2c_word(0x47) / 65.5 - self.gyro_offset[2]
 
         return accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z
+    
+    def calibrate_sensors(self, num_samples=1000):
+        gyro_readings = np.zeros(3)
+        accel_readings = np.zeros(3)
+        for _ in range(num_samples):
+            accel_readings[0] += self.read_i2c_word(0x3B)
+            accel_readings[1] += self.read_i2c_word(0x3D)
+            accel_readings[2] += self.read_i2c_word(0x3F)
+            gyro_readings[0] += self.read_i2c_word(0x43)
+            gyro_readings[1] += self.read_i2c_word(0x45)
+            gyro_readings[2] += self.read_i2c_word(0x47)
+        self.gyro_offset = gyro_readings / num_samples / 65.5      # GFS_500DPS
+        self.accel_offset = accel_readings / num_samples / 8192.0  # AFS_4G
+
+        print(f"calibrate_sensors: {self.accel_offset}")
+        print(f"calibrate_sensors: {self.gyro_offset}")
 
 class MPU9250Publisher(Node):
     def __init__(self):
         super().__init__('mpu9250_publisher')
         self.publisher_ = self.create_publisher(Imu, 'imu', 10)
         self.tf_broadcaster = TransformBroadcaster(self)
-        self.madgwick = MadgwickAHRS(sample_period=0.1)
         self.mpu = MPU9250()
-
-        timer_period = 0.01  # 10Hz(origin: 0.1)
+        timer_period = 0.01  # 100Hz(origin: 0.1/10Hz)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.last_time = self.get_clock().now()
+        self.madgwick = MadgwickAHRS(sample_period=timer_period)
 
         self.velocity = np.array([0.0, 0.0, 0.0])
         self.position = np.array([0.0, 0.0, 0.0])

@@ -281,14 +281,21 @@ class MPU9250Publisher(Node):
         t.header.stamp = self.get_clock().now().to_msg()
         t.header.frame_id = 'world'
         t.child_frame_id = 'imu_link'
-        t.transform.translation.x = self.position[0]
-        t.transform.translation.y = self.position[1]
-        t.transform.translation.z = self.position[2]
+        #t.transform.translation.x = self.position[0]
+        #t.transform.translation.y = self.position[1]
+        #t.transform.translation.z = self.position[2]
+        t.transform.translation.x = 0
+        t.transform.translation.y = 0
+        t.transform.translation.z = 0
 
-        t.transform.rotation.x = q[1]
-        t.transform.rotation.y = q[2]
-        t.transform.rotation.z = q[3]
-        t.transform.rotation.w = q[0]
+        #t.transform.rotation.x = q[1]
+        #t.transform.rotation.y = q[2]
+        #t.transform.rotation.z = q[3]
+        #t.transform.rotation.w = q[0]
+        t.transform.rotation.x = 0
+        t.transform.rotation.y = 0
+        t.transform.rotation.z = 0
+        t.transform.rotation.w = 0
 
         self.tf_broadcaster.sendTransform(t)
 

@@ -7,6 +7,7 @@ import smbus2
 import math
 import time
 import numpy as np
+import os
 #from mpu9250_jmdev.registers import *
 #from mpu9250_jmdev.mpu_9250 import MPU9250
 
@@ -277,6 +278,7 @@ class MPU9250Publisher(Node):
         self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
         self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
         self.get_logger().info(f'')    # 빈줄
+        os.system("clear")
 
         # imu 퍼블리셔에 데이터 셋팅
         imu_msg = Imu()

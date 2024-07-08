@@ -262,7 +262,8 @@ class MPU9250Publisher(Node):
                                 ([accel_x, accel_y, accel_z]) - gravity)
 
         # 위치정보 업데이트
-        self.velocity += corrected_acceleration * dt
+        #self.velocity += corrected_acceleration * dt
+        self.velocity += [accel_x, accel_y, accel_z]
         self.position += self.velocity * dt
 
         # 디버깅 로그 추가
@@ -271,8 +272,8 @@ class MPU9250Publisher(Node):
 
         # 위치 값의 스케일링 확인
         # 너무 큰 값이 나오지 않도록 적절한 스케일링 적용 필요
-        # scaling_factor = 0.1
-        # self.position *= scaling_factor
+        #scaling_factor = 0.1
+        #self.position *= scaling_factor
 
          # 디버깅 로그 추가
         self.get_logger().info(f'Position: x={self.position[0]:7.3f}, y={self.position[1]:7.3f}, z={self.position[2]:7.3f}')

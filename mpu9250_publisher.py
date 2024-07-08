@@ -236,7 +236,7 @@ class MPU9250Publisher(Node):
 
     def timer_callback(self):
         # 오프셋 지속 보정 코드
-        if self.mpu.sample_count % self.offset_update_period == 0:
+        if self.mpu.sample_count % self.mpu.offset_update_period == 0:
             self.update_offsets()
         self.mpu.sample_count += 1
 

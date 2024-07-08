@@ -236,9 +236,9 @@ class MPU9250Publisher(Node):
 
     def timer_callback(self):
         # 오프셋 지속 보정 코드
-        if self.sample_count % self.offset_update_period == 0:
+        if self.mpu.sample_count % self.offset_update_period == 0:
             self.update_offsets()
-        self.sample_count += 1
+        self.mpu.sample_count += 1
 
         current_time = self.get_clock().now()
         dt = (current_time - self.last_time).nanoseconds / 1e9

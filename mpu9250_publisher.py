@@ -278,7 +278,7 @@ class MPU9250Publisher(Node):
         self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
         self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
         self.get_logger().info(f'')    # 빈줄
-        self.get_logger().info(os.system("clear"))
+        os.system("clear")
 
         # imu 퍼블리셔에 데이터 셋팅
         imu_msg = Imu()

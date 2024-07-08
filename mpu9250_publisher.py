@@ -79,6 +79,9 @@ class MPU9250:
         self.accel_offset = np.zeros(3)
         self.calibrate_sensors()
 
+        self.offset_update_period = 100 # 주기적으로 오프셋을 업데이트하는 주기(100번마다)
+        self.sample_count = 0
+
         # 파이의 I2C 통신 장치 주소 확인하는 테스트코드(i2cdetect 사용 안할시)
         #for addr in range(0x03, 0x78):
         #    try:
@@ -203,6 +206,20 @@ class MPU9250:
         print(f"calibrate_sensors: {self.accel_offset}")
         print(f"calibrate_sensors: {self.gyro_offset}")
 
+    def update_offsets(self):
+        num_samples = 100
+        gyro_readings = np.zeros(3)
+        accel_readings = np.zeros(3)
+        for _ in range(num_samples):
+            gyro_readings[0] += self.read_i2c_word(0x43)
+            gyro_readings[1] += self.read_i2c_word(0x45)
+            gyro_readings[2] += self.read_i2c_word(0x47)
+            accel_readings[0] += self.read_i2c_word(0x3B)
+            accel_readings[1] += self.read_i2c_word(0x3D)
+            accel_readings[2] += self.read_i2c_word(0x3F)
+        self.gyro_offset = (self.gyro_offset + gyro_readings / num_samples / 65.5) / 2
+        self.accel_offset = (self.accel_offset + accel_readings / num_samples / 8192.0) / 2
+
 class MPU9250Publisher(Node):
     def __init__(self):
         super().__init__('mpu9250_publisher')
@@ -218,6 +235,11 @@ class MPU9250Publisher(Node):
         self.position = np.array([0.0, 0.0, 0.0])
 
     def timer_callback(self):
+        # 오프셋 지속 보정 코드
+        if self.sample_count % self.offset_update_period == 0:
+            self.update_offsets()
+        self.sample_count += 1
+
         current_time = self.get_clock().now()
         dt = (current_time - self.last_time).nanoseconds / 1e9
         self.last_time = current_time
@@ -252,8 +274,8 @@ class MPU9250Publisher(Node):
         self.position *= scaling_factor
 
          # 디버깅 로그 추가
-        #self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
-        #self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
+        self.get_logger().info(f'Position: x={self.position[0]:.3f}, y={self.position[1]:.3f}, z={self.position[2]:.3f}')
+        self.get_logger().info(f'Velocity: x={self.velocity[0]:.3f}, y={self.velocity[1]:.3f}, z={self.velocity[2]:.3f}')
         self.get_logger().info(f'')    # 빈줄
 
         # imu 퍼블리셔에 데이터 셋팅

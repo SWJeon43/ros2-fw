@@ -261,8 +261,8 @@ class MPU9250Publisher(Node):
                                 ([accel_x, accel_y, accel_z]) - gravity)
 
         # 위치정보 업데이트
-        self.velocity += corrected_acceleration * dt
-        self.position += self.velocity * dt
+        #self.velocity += corrected_acceleration * dt
+        #self.position += self.velocity * dt
 
         # 디버깅 로그 추가
         self.get_logger().info(f'Accel: x={accel_x:.3f}, y={accel_y:.3f}, z={accel_z:.3f}')

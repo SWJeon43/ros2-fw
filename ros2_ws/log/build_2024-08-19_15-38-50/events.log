@@ -1,0 +1,97 @@
+[0.000000] (-) TimerEvent: {}
+[0.000492] (mpu9250) JobQueued: {'identifier': 'mpu9250', 'dependencies': OrderedDict()}
+[0.000943] (rplidar_ros) JobQueued: {'identifier': 'rplidar_ros', 'dependencies': OrderedDict()}
+[0.001690] (mpu9250) JobStarted: {'identifier': 'mpu9250'}
+[0.023881] (rplidar_ros) JobStarted: {'identifier': 'rplidar_ros'}
+[0.099619] (-) TimerEvent: {}
+[0.200032] (-) TimerEvent: {}
+[0.300407] (-) TimerEvent: {}
+[0.399070] (rplidar_ros) JobProgress: {'identifier': 'rplidar_ros', 'progress': 'cmake'}
+[0.399446] (rplidar_ros) Command: {'cmd': ['/usr/bin/cmake', '/root/ros2_ws/src/rplidar_ros', '-DCATKIN_INSTALL_INTO_PREFIX_ROOT=0', '-DCMAKE_INSTALL_PREFIX=/root/ros2_ws/install/rplidar_ros'], 'cwd': '/root/ros2_ws/build/rplidar_ros', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('HOSTNAME', 'ubuntu-pi'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws/src'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/install:/root/ros2_ws2/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/install/mpu9250:/root/ros2_ws2/install/mpu9250:/opt/ros/humble'), ('MY_ENV_VAR', 'value'), ('DEBIAN_FRONTEND', 'noninteractive'), ('ROS_WS', '/root/ros2_ws'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/root/ros2_ws/build/rplidar_ros'), ('PYTHONPATH', '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1')]), 'shell': False}
+[0.405884] (-) TimerEvent: {}
+[0.506402] (-) TimerEvent: {}
+[0.571804] (rplidar_ros) StderrLine: {'line': b'\x1b[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):\n'}
+[0.572123] (rplidar_ros) StderrLine: {'line': b'  Compatibility with CMake < 2.8.12 will be removed from a future version of\n'}
+[0.572207] (rplidar_ros) StderrLine: {'line': b'  CMake.\n'}
+[0.572273] (rplidar_ros) StderrLine: {'line': b'\n'}
+[0.572336] (rplidar_ros) StderrLine: {'line': b'  Update the VERSION argument <min> value or use a ...<max> suffix to tell\n'}
+[0.572398] (rplidar_ros) StderrLine: {'line': b'  CMake that the project does not need compatibility with older versions.\n'}
+[0.572479] (rplidar_ros) StderrLine: {'line': b'\n'}
+[0.572540] (rplidar_ros) StderrLine: {'line': b'\x1b[0m\n'}
+[0.606516] (-) TimerEvent: {}
+[0.707042] (-) TimerEvent: {}
+[0.807456] (-) TimerEvent: {}
+[0.905697] (mpu9250) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/mpu9250', 'build', '--build-base', '/root/ros2_ws/build/mpu9250/build', 'install', '--record', '/root/ros2_ws/build/mpu9250/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/root/ros2_ws/src/mpu9250', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'HOSTNAME': 'ubuntu-pi', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/root/ros2_ws/src', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/root/ros2_ws/install:/root/ros2_ws2/install', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/root/ros2_ws/install/mpu9250:/root/ros2_ws2/install/mpu9250:/opt/ros/humble', 'MY_ENV_VAR': 'value', 'DEBIAN_FRONTEND': 'noninteractive', 'ROS_WS': '/root/ros2_ws', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/root/ros2_ws/build/mpu9250', 'PYTHONPATH': '/root/ros2_ws/build/mpu9250/prefix_override:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[0.909338] (-) TimerEvent: {}
+[1.009645] (-) TimerEvent: {}
+[1.110057] (-) TimerEvent: {}
+[1.210429] (-) TimerEvent: {}
+[1.221876] (mpu9250) StdoutLine: {'line': b'running egg_info\n'}
+[1.223135] (mpu9250) StdoutLine: {'line': b'writing ../../build/mpu9250/mpu9250.egg-info/PKG-INFO\n'}
+[1.223566] (mpu9250) StdoutLine: {'line': b'writing dependency_links to ../../build/mpu9250/mpu9250.egg-info/dependency_links.txt\n'}
+[1.223803] (mpu9250) StdoutLine: {'line': b'writing entry points to ../../build/mpu9250/mpu9250.egg-info/entry_points.txt\n'}
+[1.223970] (mpu9250) StdoutLine: {'line': b'writing requirements to ../../build/mpu9250/mpu9250.egg-info/requires.txt\n'}
+[1.224081] (mpu9250) StdoutLine: {'line': b'writing top-level names to ../../build/mpu9250/mpu9250.egg-info/top_level.txt\n'}
+[1.227550] (mpu9250) StdoutLine: {'line': b"reading manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'\n"}
+[1.228841] (mpu9250) StdoutLine: {'line': b"writing manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'\n"}
+[1.229017] (mpu9250) StdoutLine: {'line': b'running build\n'}
+[1.229098] (mpu9250) StdoutLine: {'line': b'running build_py\n'}
+[1.229737] (mpu9250) StdoutLine: {'line': b'copying mpu9250/mpu9250_node.py -> /root/ros2_ws/build/mpu9250/build/lib/mpu9250\n'}
+[1.231189] (mpu9250) StdoutLine: {'line': b'running install\n'}
+[1.231662] (mpu9250) StdoutLine: {'line': b'running install_lib\n'}
+[1.232931] (mpu9250) StdoutLine: {'line': b'copying /root/ros2_ws/build/mpu9250/build/lib/mpu9250/mpu9250_node.py -> /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250\n'}
+[1.234477] (mpu9250) StdoutLine: {'line': b'byte-compiling /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250/mpu9250_node.py to mpu9250_node.cpython-310.pyc\n'}
+[1.236629] (mpu9250) StdoutLine: {'line': b'running install_data\n'}
+[1.237128] (mpu9250) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.241806] (mpu9250) StdoutLine: {'line': b"removing '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[1.242454] (mpu9250) StdoutLine: {'line': b'Copying ../../build/mpu9250/mpu9250.egg-info to /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info\n'}
+[1.244625] (mpu9250) StdoutLine: {'line': b'running install_scripts\n'}
+[1.272413] (rplidar_ros) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[1.283614] (mpu9250) StdoutLine: {'line': b'Installing mpu9250_node script to /root/ros2_ws/install/mpu9250/lib/mpu9250\n'}
+[1.284635] (mpu9250) StdoutLine: {'line': b"writing list of installed files to '/root/ros2_ws/build/mpu9250/install.log'\n"}
+[1.310553] (-) TimerEvent: {}
+[1.361934] (mpu9250) CommandEnded: {'returncode': 0}
+[1.385947] (mpu9250) JobEnded: {'identifier': 'mpu9250', 'rc': 0}
+[1.410678] (-) TimerEvent: {}
+[1.511125] (-) TimerEvent: {}
+[1.611589] (-) TimerEvent: {}
+[1.712083] (-) TimerEvent: {}
+[1.812543] (-) TimerEvent: {}
+[1.829201] (rplidar_ros) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[1.858426] (rplidar_ros) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.912685] (-) TimerEvent: {}
+[2.013195] (-) TimerEvent: {}
+[2.039702] (rplidar_ros) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[2.051858] (rplidar_ros) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[2.055878] (rplidar_ros) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.058123] (rplidar_ros) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.065974] (rplidar_ros) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[2.113320] (-) TimerEvent: {}
+[2.213849] (-) TimerEvent: {}
+[2.232338] (rplidar_ros) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[2.246140] (rplidar_ros) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[2.246494] (rplidar_ros) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[2.247225] (rplidar_ros) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[2.294212] (rplidar_ros) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:16 (find_package):\n'}
+[2.294521] (rplidar_ros) StderrLine: {'line': b'  By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has\n'}
+[2.294596] (rplidar_ros) StderrLine: {'line': b'  asked CMake to find a package configuration file provided by "catkin", but\n'}
+[2.294662] (rplidar_ros) StderrLine: {'line': b'  CMake did not find one.\n'}
+[2.294742] (rplidar_ros) StderrLine: {'line': b'\n'}
+[2.294816] (rplidar_ros) StderrLine: {'line': b'  Could not find a package configuration file provided by "catkin" with any\n'}
+[2.294897] (rplidar_ros) StderrLine: {'line': b'  of the following names:\n'}
+[2.294957] (rplidar_ros) StderrLine: {'line': b'\n'}
+[2.295015] (rplidar_ros) StderrLine: {'line': b'    catkinConfig.cmake\n'}
+[2.295074] (rplidar_ros) StderrLine: {'line': b'    catkin-config.cmake\n'}
+[2.295131] (rplidar_ros) StderrLine: {'line': b'\n'}
+[2.295189] (rplidar_ros) StderrLine: {'line': b'  Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set\n'}
+[2.295247] (rplidar_ros) StderrLine: {'line': b'  "catkin_DIR" to a directory containing one of the above files.  If "catkin"\n'}
+[2.295305] (rplidar_ros) StderrLine: {'line': b'  provides a separate development package or SDK, be sure it has been\n'}
+[2.295363] (rplidar_ros) StderrLine: {'line': b'  installed.\n'}
+[2.295420] (rplidar_ros) StderrLine: {'line': b'\n'}
+[2.295477] (rplidar_ros) StderrLine: {'line': b'\x1b[0m\n'}
+[2.295534] (rplidar_ros) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[2.295606] (rplidar_ros) StdoutLine: {'line': b'See also "/root/ros2_ws/build/rplidar_ros/CMakeFiles/CMakeOutput.log".\n'}
+[2.301912] (rplidar_ros) CommandEnded: {'returncode': 1}
+[2.313938] (-) TimerEvent: {}
+[2.333314] (rplidar_ros) JobEnded: {'identifier': 'rplidar_ros', 'rc': 1}
+[2.346236] (-) EventReactorShutdown: {}

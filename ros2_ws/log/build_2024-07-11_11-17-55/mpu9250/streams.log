@@ -1,0 +1,25 @@
+[1.079s] Invoking command in '/root/ros2_ws/src/mpu9250': PYTHONPATH=/root/ros2_ws/build/mpu9250/prefix_override:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mpu9250 build --build-base /root/ros2_ws/build/mpu9250/build install --record /root/ros2_ws/build/mpu9250/install.log --single-version-externally-managed install_data
+[1.447s] running egg_info
+[1.448s] writing ../../build/mpu9250/mpu9250.egg-info/PKG-INFO
+[1.448s] writing dependency_links to ../../build/mpu9250/mpu9250.egg-info/dependency_links.txt
+[1.452s] writing entry points to ../../build/mpu9250/mpu9250.egg-info/entry_points.txt
+[1.453s] writing requirements to ../../build/mpu9250/mpu9250.egg-info/requires.txt
+[1.453s] writing top-level names to ../../build/mpu9250/mpu9250.egg-info/top_level.txt
+[1.457s] reading manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'
+[1.458s] writing manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'
+[1.459s] running build
+[1.459s] running build_py
+[1.459s] copying mpu9250/imusensor/MPU9250/MPU9250.py -> /root/ros2_ws/build/mpu9250/build/lib/mpu9250/imusensor/MPU9250
+[1.460s] running install
+[1.461s] running install_lib
+[1.463s] copying /root/ros2_ws/build/mpu9250/build/lib/mpu9250/imusensor/MPU9250/MPU9250.py -> /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250
+[1.464s] byte-compiling /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250/MPU9250.py to MPU9250.cpython-310.pyc
+[1.468s] Sorry: TabError: inconsistent use of tabs and spaces in indentation (MPU9250.py, line 401)
+[1.468s] running install_data
+[1.468s] running install_egg_info
+[1.471s] removing '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info' (and everything under it)
+[1.471s] Copying ../../build/mpu9250/mpu9250.egg-info to /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info
+[1.473s] running install_scripts
+[1.503s] Installing mpu9250_node script to /root/ros2_ws/install/mpu9250/lib/mpu9250
+[1.504s] writing list of installed files to '/root/ros2_ws/build/mpu9250/install.log'
+[1.596s] Invoked command in '/root/ros2_ws/src/mpu9250' returned '0': PYTHONPATH=/root/ros2_ws/build/mpu9250/prefix_override:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mpu9250 build --build-base /root/ros2_ws/build/mpu9250/build install --record /root/ros2_ws/build/mpu9250/install.log --single-version-externally-managed install_data

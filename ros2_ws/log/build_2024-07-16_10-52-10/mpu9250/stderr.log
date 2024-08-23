@@ -1,0 +1,5 @@
+  File "/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250/mpu9250_node.py", line 63
+    중력 보정
+         ^^^^^^
+SyntaxError: invalid syntax
+

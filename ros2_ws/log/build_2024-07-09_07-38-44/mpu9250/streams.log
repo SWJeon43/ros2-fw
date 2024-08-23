@@ -1,0 +1,46 @@
+[1.079s] Invoking command in '/root/ros2_ws2/src/mpu9250': PYTHONPATH=/root/ros2_ws2/build/mpu9250/prefix_override:/root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mpu9250 build --build-base /root/ros2_ws2/build/mpu9250/build install --record /root/ros2_ws2/build/mpu9250/install.log --single-version-externally-managed install_data
+[1.447s] running egg_info
+[1.448s] writing ../../build/mpu9250/mpu9250.egg-info/PKG-INFO
+[1.448s] writing dependency_links to ../../build/mpu9250/mpu9250.egg-info/dependency_links.txt
+[1.452s] writing entry points to ../../build/mpu9250/mpu9250.egg-info/entry_points.txt
+[1.452s] writing requirements to ../../build/mpu9250/mpu9250.egg-info/requires.txt
+[1.453s] writing top-level names to ../../build/mpu9250/mpu9250.egg-info/top_level.txt
+[1.457s] reading manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'
+[1.459s] writing manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'
+[1.459s] running build
+[1.459s] running build_py
+[1.459s] copying mpu9250/mpu9250_publisher.py -> /root/ros2_ws2/build/mpu9250/build/lib/mpu9250
+[1.460s] running install
+[1.460s] running install_lib
+[1.461s] creating /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250
+[1.462s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/__init__.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250
+[1.462s] creating /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor
+[1.462s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/__init__.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor
+[1.462s] creating /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters
+[1.462s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/filters/madgwick.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters
+[1.463s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/filters/kalman.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters
+[1.463s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/filters/__init__.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters
+[1.463s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/filters/complimentary.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters
+[1.463s] creating /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250
+[1.463s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/MPU9250/config.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250
+[1.463s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/MPU9250/__init__.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250
+[1.464s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/imusensor/MPU9250/MPU9250.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250
+[1.464s] copying /root/ros2_ws2/build/mpu9250/build/lib/mpu9250/mpu9250_publisher.py -> /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250
+[1.465s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/__init__.py to __init__.cpython-310.pyc
+[1.465s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/__init__.py to __init__.cpython-310.pyc
+[1.465s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters/madgwick.py to madgwick.cpython-310.pyc
+[1.468s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters/kalman.py to kalman.cpython-310.pyc
+[1.470s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters/__init__.py to __init__.cpython-310.pyc
+[1.471s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/filters/complimentary.py to complimentary.cpython-310.pyc
+[1.471s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250/config.py to config.cpython-310.pyc
+[1.472s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250/__init__.py to __init__.cpython-310.pyc
+[1.472s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/imusensor/MPU9250/MPU9250.py to MPU9250.cpython-310.pyc
+[1.478s] byte-compiling /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/mpu9250_publisher.py to mpu9250_publisher.cpython-310.pyc
+[1.479s] running install_data
+[1.479s] running install_egg_info
+[1.482s] removing '/root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info' (and everything under it)
+[1.482s] Copying ../../build/mpu9250/mpu9250.egg-info to /root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info
+[1.483s] running install_scripts
+[1.532s] Installing mpu9250_publisher script to /root/ros2_ws2/install/mpu9250/lib/mpu9250
+[1.533s] writing list of installed files to '/root/ros2_ws2/build/mpu9250/install.log'
+[1.603s] Invoked command in '/root/ros2_ws2/src/mpu9250' returned '0': PYTHONPATH=/root/ros2_ws2/build/mpu9250/prefix_override:/root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mpu9250 build --build-base /root/ros2_ws2/build/mpu9250/build install --record /root/ros2_ws2/build/mpu9250/install.log --single-version-externally-managed install_data

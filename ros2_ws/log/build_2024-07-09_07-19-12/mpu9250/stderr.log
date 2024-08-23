@@ -1,0 +1,5 @@
+  File "/root/ros2_ws2/install/mpu9250/lib/python3.10/site-packages/mpu9250/mpu9250_publisher.py", line 12
+    from imusensor/imusensor.MPU9250 import MPU9250
+                  ^
+SyntaxError: invalid syntax
+

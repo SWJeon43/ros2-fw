@@ -1,0 +1,118 @@
+[0.000000] (-) TimerEvent: {}
+[0.001098] (mpu9250) JobQueued: {'identifier': 'mpu9250', 'dependencies': OrderedDict()}
+[0.002218] (sllidar_ros2) JobQueued: {'identifier': 'sllidar_ros2', 'dependencies': OrderedDict()}
+[0.004138] (mpu9250) JobStarted: {'identifier': 'mpu9250'}
+[0.050160] (sllidar_ros2) JobStarted: {'identifier': 'sllidar_ros2'}
+[0.098987] (-) TimerEvent: {}
+[0.199565] (-) TimerEvent: {}
+[0.300127] (-) TimerEvent: {}
+[0.400803] (-) TimerEvent: {}
+[0.501543] (-) TimerEvent: {}
+[0.602706] (-) TimerEvent: {}
+[0.703575] (-) TimerEvent: {}
+[0.804704] (-) TimerEvent: {}
+[0.855029] (sllidar_ros2) JobProgress: {'identifier': 'sllidar_ros2', 'progress': 'cmake'}
+[0.856430] (sllidar_ros2) JobProgress: {'identifier': 'sllidar_ros2', 'progress': 'build'}
+[0.857915] (sllidar_ros2) Command: {'cmd': ['/usr/bin/cmake', '--build', '/root/ros2_ws/build/sllidar_ros2', '--', '-j4', '-l4'], 'cwd': '/root/ros2_ws/build/sllidar_ros2', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('HOSTNAME', 'ubuntu-pi'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/install/sllidar_ros2:/root/ros2_ws/install/mpu9250:/opt/ros/humble'), ('MY_ENV_VAR', 'value'), ('DEBIAN_FRONTEND', 'noninteractive'), ('ROS_WS', '/root/ros2_ws'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/root/ros2_ws/build/sllidar_ros2'), ('PYTHONPATH', '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/install/sllidar_ros2:/root/ros2_ws/install/mpu9250:/opt/ros/humble')]), 'shell': False}
+[0.904894] (-) TimerEvent: {}
+[1.005745] (-) TimerEvent: {}
+[1.093542] (sllidar_ros2) StdoutLine: {'line': b'[ 10%] Built target sllidar_client\n'}
+[1.097016] (sllidar_ros2) StdoutLine: {'line': b'[100%] Built target sllidar_node\n'}
+[1.105853] (-) TimerEvent: {}
+[1.148231] (sllidar_ros2) CommandEnded: {'returncode': 0}
+[1.205963] (-) TimerEvent: {}
+[1.306798] (-) TimerEvent: {}
+[1.383829] (sllidar_ros2) JobProgress: {'identifier': 'sllidar_ros2', 'progress': 'install'}
+[1.406961] (-) TimerEvent: {}
+[1.411194] (sllidar_ros2) Command: {'cmd': ['/usr/bin/cmake', '--install', '/root/ros2_ws/build/sllidar_ros2'], 'cwd': '/root/ros2_ws/build/sllidar_ros2', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('HOSTNAME', 'ubuntu-pi'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/install/sllidar_ros2:/root/ros2_ws/install/mpu9250:/opt/ros/humble'), ('MY_ENV_VAR', 'value'), ('DEBIAN_FRONTEND', 'noninteractive'), ('ROS_WS', '/root/ros2_ws'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/root/ros2_ws/build/sllidar_ros2'), ('PYTHONPATH', '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/install/sllidar_ros2:/root/ros2_ws/install/mpu9250:/opt/ros/humble')]), 'shell': False}
+[1.454803] (sllidar_ros2) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[1.455301] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch\n'}
+[1.455398] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2_launch.py\n'}
+[1.455616] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_tcp_launch.py\n'}
+[1.455756] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m7_launch.py\n'}
+[1.455852] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m12_launch .py\n'}
+[1.455929] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_launch.py\n'}
+[1.456003] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_launch.py\n'}
+[1.456073] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_c1_launch.py\n'}
+[1.456163] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a1_launch.py\n'}
+[1.456230] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s3_launch.py\n'}
+[1.456297] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a3_launch.py\n'}
+[1.456367] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_t1_launch.py\n'}
+[1.456431] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2e_launch.py\n'}
+[1.456495] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s3_launch.py\n'}
+[1.456565] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m8_launch.py\n'}
+[1.456633] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m12_launch.py\n'}
+[1.456751] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m7_launch.py\n'}
+[1.456839] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_t1_launch.py\n'}
+[1.456909] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2e_launch.py\n'}
+[1.456975] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_c1_launch.py\n'}
+[1.457041] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a3_launch.py\n'}
+[1.457107] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2_launch.py\n'}
+[1.457168] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_tcp_launch.py\n'}
+[1.457326] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a1_launch.py\n'}
+[1.457497] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m8_launch.py\n'}
+[1.457582] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/rviz\n'}
+[1.457665] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/rviz/sllidar_ros2.rviz\n'}
+[1.457749] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node\n'}
+[1.457814] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/lib/sllidar_ros2/sllidar_client\n'}
+[1.457883] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/ament_index/resource_index/package_run_dependencies/sllidar_ros2\n'}
+[1.457956] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/ament_index/resource_index/parent_prefix_path/sllidar_ros2\n'}
+[1.458069] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.sh\n'}
+[1.458270] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.dsv\n'}
+[1.458470] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/environment/path.sh\n'}
+[1.458620] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/environment/path.dsv\n'}
+[1.458896] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.bash\n'}
+[1.459136] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.sh\n'}
+[1.459301] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.zsh\n'}
+[1.459381] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.dsv\n'}
+[1.459476] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/package.dsv\n'}
+[1.459552] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/ament_index/resource_index/packages/sllidar_ros2\n'}
+[1.459626] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[1.459891] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[1.460000] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config.cmake\n'}
+[1.460087] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config-version.cmake\n'}
+[1.460171] (sllidar_ros2) StdoutLine: {'line': b'-- Up-to-date: /root/ros2_ws/install/sllidar_ros2/share/sllidar_ros2/package.xml\n'}
+[1.472883] (sllidar_ros2) CommandEnded: {'returncode': 0}
+[1.507088] (-) TimerEvent: {}
+[1.607566] (-) TimerEvent: {}
+[1.709215] (-) TimerEvent: {}
+[1.792223] (sllidar_ros2) JobEnded: {'identifier': 'sllidar_ros2', 'rc': 0}
+[1.809372] (-) TimerEvent: {}
+[1.910065] (-) TimerEvent: {}
+[2.010843] (-) TimerEvent: {}
+[2.097698] (mpu9250) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/mpu9250', 'build', '--build-base', '/root/ros2_ws/build/mpu9250/build', 'install', '--record', '/root/ros2_ws/build/mpu9250/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/root/ros2_ws/src/mpu9250', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'HOSTNAME': 'ubuntu-pi', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/root/ros2_ws/install', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/root/ros2_ws/install/sllidar_ros2:/root/ros2_ws/install/mpu9250:/opt/ros/humble', 'MY_ENV_VAR': 'value', 'DEBIAN_FRONTEND': 'noninteractive', 'ROS_WS': '/root/ros2_ws', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/root/ros2_ws/build/mpu9250', 'PYTHONPATH': '/root/ros2_ws/build/mpu9250/prefix_override:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/root/ros2_ws/install/sllidar_ros2'}, 'shell': False}
+[2.110933] (-) TimerEvent: {}
+[2.211605] (-) TimerEvent: {}
+[2.312344] (-) TimerEvent: {}
+[2.412981] (-) TimerEvent: {}
+[2.513637] (-) TimerEvent: {}
+[2.614416] (-) TimerEvent: {}
+[2.688678] (mpu9250) StdoutLine: {'line': b'running egg_info\n'}
+[2.690670] (mpu9250) StdoutLine: {'line': b'writing ../../build/mpu9250/mpu9250.egg-info/PKG-INFO\n'}
+[2.691466] (mpu9250) StdoutLine: {'line': b'writing dependency_links to ../../build/mpu9250/mpu9250.egg-info/dependency_links.txt\n'}
+[2.695272] (mpu9250) StdoutLine: {'line': b'writing entry points to ../../build/mpu9250/mpu9250.egg-info/entry_points.txt\n'}
+[2.696090] (mpu9250) StdoutLine: {'line': b'writing requirements to ../../build/mpu9250/mpu9250.egg-info/requires.txt\n'}
+[2.696833] (mpu9250) StdoutLine: {'line': b'writing top-level names to ../../build/mpu9250/mpu9250.egg-info/top_level.txt\n'}
+[2.708322] (mpu9250) StdoutLine: {'line': b"reading manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'\n"}
+[2.710511] (mpu9250) StdoutLine: {'line': b"writing manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'\n"}
+[2.710936] (mpu9250) StdoutLine: {'line': b'running build\n'}
+[2.711233] (mpu9250) StdoutLine: {'line': b'running build_py\n'}
+[2.713115] (mpu9250) StdoutLine: {'line': b'copying mpu9250/mpu9250_node.py -> /root/ros2_ws/build/mpu9250/build/lib/mpu9250\n'}
+[2.714569] (-) TimerEvent: {}
+[2.718973] (mpu9250) StdoutLine: {'line': b'running install\n'}
+[2.720110] (mpu9250) StdoutLine: {'line': b'running install_lib\n'}
+[2.722334] (mpu9250) StdoutLine: {'line': b'copying /root/ros2_ws/build/mpu9250/build/lib/mpu9250/mpu9250_node.py -> /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250\n'}
+[2.724321] (mpu9250) StdoutLine: {'line': b'byte-compiling /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250/mpu9250_node.py to mpu9250_node.cpython-310.pyc\n'}
+[2.726939] (mpu9250) StdoutLine: {'line': b'running install_data\n'}
+[2.727144] (mpu9250) StdoutLine: {'line': b'running install_egg_info\n'}
+[2.730826] (mpu9250) StdoutLine: {'line': b"removing '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[2.731496] (mpu9250) StdoutLine: {'line': b'Copying ../../build/mpu9250/mpu9250.egg-info to /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info\n'}
+[2.733753] (mpu9250) StdoutLine: {'line': b'running install_scripts\n'}
+[2.808160] (mpu9250) StdoutLine: {'line': b'Installing mpu9250_node script to /root/ros2_ws/install/mpu9250/lib/mpu9250\n'}
+[2.809616] (mpu9250) StdoutLine: {'line': b"writing list of installed files to '/root/ros2_ws/build/mpu9250/install.log'\n"}
+[2.814643] (-) TimerEvent: {}
+[2.915305] (-) TimerEvent: {}
+[2.991520] (mpu9250) CommandEnded: {'returncode': 0}
+[3.018739] (-) TimerEvent: {}
+[3.048537] (mpu9250) JobEnded: {'identifier': 'mpu9250', 'rc': 0}
+[3.050348] (-) EventReactorShutdown: {}

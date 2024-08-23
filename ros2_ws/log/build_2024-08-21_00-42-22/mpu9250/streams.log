@@ -1,0 +1,24 @@
+[1.573s] Invoking command in '/root/ros2_ws/src/mpu9250': PYTHONPATH=/root/ros2_ws/build/mpu9250/prefix_override:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mpu9250 build --build-base /root/ros2_ws/build/mpu9250/build install --record /root/ros2_ws/build/mpu9250/install.log --single-version-externally-managed install_data
+[2.049s] running egg_info
+[2.050s] writing ../../build/mpu9250/mpu9250.egg-info/PKG-INFO
+[2.051s] writing dependency_links to ../../build/mpu9250/mpu9250.egg-info/dependency_links.txt
+[2.051s] writing entry points to ../../build/mpu9250/mpu9250.egg-info/entry_points.txt
+[2.052s] writing requirements to ../../build/mpu9250/mpu9250.egg-info/requires.txt
+[2.052s] writing top-level names to ../../build/mpu9250/mpu9250.egg-info/top_level.txt
+[2.078s] reading manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'
+[2.082s] writing manifest file '../../build/mpu9250/mpu9250.egg-info/SOURCES.txt'
+[2.082s] running build
+[2.082s] running build_py
+[2.086s] copying mpu9250/mpu9250_node.py -> /root/ros2_ws/build/mpu9250/build/lib/mpu9250
+[2.090s] running install
+[2.090s] running install_lib
+[2.093s] copying /root/ros2_ws/build/mpu9250/build/lib/mpu9250/mpu9250_node.py -> /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250
+[2.096s] byte-compiling /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250/mpu9250_node.py to mpu9250_node.cpython-310.pyc
+[2.101s] running install_data
+[2.102s] running install_egg_info
+[2.105s] removing '/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info' (and everything under it)
+[2.105s] Copying ../../build/mpu9250/mpu9250.egg-info to /root/ros2_ws/install/mpu9250/lib/python3.10/site-packages/mpu9250-0.0.0-py3.10.egg-info
+[2.109s] running install_scripts
+[2.166s] Installing mpu9250_node script to /root/ros2_ws/install/mpu9250/lib/mpu9250
+[2.171s] writing list of installed files to '/root/ros2_ws/build/mpu9250/install.log'
+[2.271s] Invoked command in '/root/ros2_ws/src/mpu9250' returned '0': PYTHONPATH=/root/ros2_ws/build/mpu9250/prefix_override:/root/ros2_ws/install/mpu9250/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mpu9250 build --build-base /root/ros2_ws/build/mpu9250/build install --record /root/ros2_ws/build/mpu9250/install.log --single-version-externally-managed install_data
